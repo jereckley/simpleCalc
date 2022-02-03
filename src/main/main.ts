@@ -1,6 +1,7 @@
 import { BasicOptions, prompt } from "readline-sync";
 import { Calc } from "./calc";
 
+//i'm not super happy with the size of this method, it could be chissled at
 function getAndProcessNewInput(calc: Calc): boolean {
 	const commands = tools.prompt();
 	let result = "";
