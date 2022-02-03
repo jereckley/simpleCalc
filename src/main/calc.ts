@@ -1,29 +1,45 @@
 export class Calc {
-	operands: number[] = []
-	operators: string[] = []
+	operands: string[] = [];
 
 	addOperand(op: string): string {
-		return "foo"
+		const num = parseFloat(op)
+		if (isNaN(num)) {
+			if (this.operands.length >= 2) {
+				throw new Error(
+					"Input must be a number or operator(+,-,/,*)"
+				);
+			} else {
+				throw new Error("Input must be a number");
+			}
+		} else {
+			this.operands.push(op)
+		}
+
+		return op
 	}
 
-	addOperator(op: string): string {
-		return "bar"
+	processOperator(op: string): string {
+		let result: string | undefined;
+		if(op.length === 1 && this.isOperator(op)) {
+			result = this.getResult(op).toString()
+			this.operands.push(result)			
+		} else {
+			throw new Error("Input must be an operator(+,-,/,*)")
+		}
+		return result;
 	}
 
 	isOperator(op: string): boolean {
-		return false
+		return ["/", "-", "*", "+"].indexOf(op) !== -1
 	}
 
-	isOnlyAcceptingOperators(): boolean {
-		return false
+	isOnlyAcceptingNumbers(): boolean {
+		return this.operands.length < 2;
 	}
 
-	isReadyToReturnResult(): boolean {
-		return false
+	getResult(op: string): number {
+		const second = this.operands.pop()
+		const first = this.operands.pop()
+		return eval(first + " " + op + " " + second);
 	}
-
-	getResult(): number {
-		return 0
-	}
-
 }
