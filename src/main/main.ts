@@ -31,6 +31,7 @@ function getAndProcessNewInput(calc: Calc): boolean {
 	return !stopApplication;
 }
 
+//tools put into an object for mocking purposes
 export const tools = {
 	prompt: (options?: BasicOptions): string => prompt(options),
 	getAndProcessNewInput: (calc: Calc): boolean =>
@@ -38,6 +39,9 @@ export const tools = {
 };
 
 export function main() {
+	console.log("\n\n// RPN Calculator \\\\")
+	console.log("-- start by entering at least two numbers followed by the appropriate operators")
+	console.log("-- enter \"q\" or \"exit\" to exit")
 	const calc = new Calc();
 	let keepWaiting = true;
 	while (keepWaiting) {
